@@ -12,7 +12,7 @@ def download_images(images, folder_name):
     timestamp = str(datetime.timestamp(datetime.now())).replace(".","")
     if len(images) != 0: 
         for i, image in enumerate(images): 
-            image_link = image["src"]
+            image_link = image["data-src"]
             if image_link != "" and ".gif" not in image_link and "badges" not in image_link:
                 with open(f"{folder_name}/IMG{timestamp}{i+1}.jpg", "wb+") as f:
                     im = requests.get(image_link)
@@ -28,7 +28,7 @@ def main(nbr):
         os.mkdir(folder_name) 
 
     for i in range(1,nbr+1):
-        url ="https://www.mubawab.ma/fr/plr/casablanca-settat/listing-promotion"+str(nbr)+"#catalog-listing"
+        url ="https://www.jumia.ma/catalog/?q=jacket+hommes"+str(nbr)+"#catalog-listing"
         r = requests.get(url) 
         soup = BeautifulSoup(r.text , 'html.parser') 
         images =   soup.find_all("img")
